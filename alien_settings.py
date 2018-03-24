@@ -5,7 +5,7 @@ class Settings():
         """Initialize the game's static settings."""
         # Screen settings.
         self.screen_width = 1000
-        self.screen_height = 675
+        self.screen_height = 650
         self.bg_color = (255, 255, 255)
         
         # Ship settings.
@@ -21,7 +21,7 @@ class Settings():
         self.fleet_drop_speed = 2
             
         # How quickly the game speeds up.
-        self.speedup_scale = 0.5
+        self.speedup_scale = 0.8
         # How quickly the alien point values increase.
         self.score_scale = 1.5
     
