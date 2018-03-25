@@ -29,7 +29,7 @@ class LoginPage(object):
         secret = self.password.get()
         if name == '' and secret == '':
             self.page.destroy()
-            VipPage(self.root)
+            ChineseVipPage(self.root)
             print(name)
             print(secret)
         else:
@@ -154,14 +154,14 @@ class Ordinary(object):
         LoginPage(self.root)
 
 
-class VipPage(object):
+class ChineseVipPage(object):
     def __init__(self, master=None):
         self.root = master
         self.root.geometry('%dx%d' % (385, 380))
         self.createPage()
 
     def createPage(self):
-        self.basic_calculator = InputFrame(self.root)  # 创建不同Frame
+        self.basic_calculator = Calculator(self.root)  # 创建不同Frame
         self.sci_calculator = QueryFrame(self.root)
         self.countPage = CountFrame(self.root)
         self.aboutPage = AboutFrame(self.root)
@@ -170,7 +170,14 @@ class VipPage(object):
 
         # 设置菜单栏
         self.menubar = Menu(self.root)
-        self.menubar.add_command(label='返回', command=self.login)
+        calc_menu = Menu(self.menubar, tearoff=0)
+        calc_menu.add_command(label='退出', command=lambda: exit())
+        # calc_menu.add_command(label='中文', command=lambda: self.chinese())
+        calc_menu.add_command(label='English', command=lambda: self.english())
+        calc_menu.add_command(label='日本语', command=lambda: self.japanese())
+        calc_menu.add_command(label='返回', command=lambda: self.login())
+        self.menubar.add_cascade(label='菜单', menu=calc_menu)
+
         self.menubar.add_command(label='基础计算', command=self.inputData)
         self.menubar.add_command(label='科学计算', command=self.queryData)
         self.menubar.add_command(label='统计计算', command=self.countData)
@@ -222,6 +229,229 @@ class VipPage(object):
         self.games.destroy()
         self.menubar.destroy()
         LoginPage(self.root)
+
+    '''def chinese(self):
+        self.basic_calculator.pack()
+        self.sci_calculator.pack_forget()
+        self.countPage.pack_forget()
+        self.aboutPage.pack_forget()
+        self.games.pack_forget()
+        self.ChineseVipPage(self.root)'''
+
+    def japanese(self):
+        self.basic_calculator.pack_forget()
+        self.sci_calculator.pack_forget()
+        self.countPage.pack_forget()
+        self.aboutPage.pack_forget()
+        self.games.pack_forget()
+        JapaneseVipPage(self.root)
+
+    def english(self):
+        self.basic_calculator.pack_forget()
+        self.sci_calculator.pack_forget()
+        self.countPage.pack_forget()
+        self.aboutPage.pack_forget()
+        EnglishVipPage(self.root)
+
+
+class JapaneseVipPage(object):
+    def __init__(self, master=None):
+        self.root = master
+        self.root.geometry('%dx%d' % (385, 380))
+        self.createPage()
+
+    def createPage(self):
+        self.basic_calculator = Calculator(self.root)  # 创建不同Frame
+        self.sci_calculator = QueryFrame(self.root)
+        self.countPage = CountFrame(self.root)
+        self.aboutPage = AboutFrame(self.root)
+        self.games = Games(self.root)
+        self.basic_calculator.pack()  # 默认显示数据录入界面
+
+        # 设置菜单栏
+        self.menubar = Menu(self.root)
+        calc_menu = Menu(self.menubar, tearoff=0)
+        calc_menu.add_command(label='离', command=lambda: exit())
+        calc_menu.add_command(label='中文', command=lambda: self.chinese())
+        calc_menu.add_command(label='English', command=lambda: self.english())
+        # calc_menu.add_command(label='日本语', command=lambda: self.japanese())
+        calc_menu.add_command(label='戻る', command=lambda: self.login())
+        self.menubar.add_cascade(label='メニュー', menu=calc_menu)
+
+        self.menubar.add_command(label='科学計算', command=self.inputData)
+        self.menubar.add_command(label='データ検索', command=self.queryData)
+        self.menubar.add_command(label='統計分析', command=self.countData)
+        self.menubar.add_command(label='財務計算', command=self.aboutDisp)
+        self.menubar.add_command(label='ゲーム', command=self.gameS)
+        self.root['menu'] = self.menubar
+
+    def inputData(self):
+        self.basic_calculator.pack()
+        self.sci_calculator.pack_forget()
+        self.countPage.pack_forget()
+        self.aboutPage.pack_forget()
+        self.games.pack_forget()
+
+    def queryData(self):
+        self.basic_calculator.pack_forget()
+        self.sci_calculator.pack()
+        self.countPage.pack_forget()
+        self.aboutPage.pack_forget()
+        self.games.pack_forget()
+
+
+    def countData(self):
+        self.basic_calculator.pack_forget()
+        self.sci_calculator.pack_forget()
+        self.countPage.pack()
+        self.aboutPage.pack_forget()
+        self.games.pack_forget()
+
+    def aboutDisp(self):
+        self.basic_calculator.pack_forget()
+        self.sci_calculator.pack_forget()
+        self.countPage.pack_forget()
+        self.aboutPage.pack()
+        self.games.pack_forget()
+
+    def gameS(self):
+        self.basic_calculator.pack_forget()
+        self.sci_calculator.pack_forget()
+        self.countPage.pack_forget()
+        self.aboutPage.pack_forget()
+        self.games.pack()
+
+    def login(self):
+        self.basic_calculator.destroy()
+        self.sci_calculator.destroy()
+        self.countPage.destroy()
+        self.aboutPage.destroy()
+        self.games.destroy()
+        self.menubar.destroy()
+        LoginPage(self.root)
+
+    def chinese(self):
+        self.basic_calculator.pack()
+        self.sci_calculator.pack_forget()
+        self.countPage.pack_forget()
+        self.aboutPage.pack_forget()
+        self.games.pack_forget()
+        ChineseVipPage(self.root)
+
+    '''def japanese(self):
+        self.basic_calculator.pack_forget()
+        self.sci_calculator.pack_forget()
+        self.countPage.pack_forget()
+        self.aboutPage.pack_forget()
+        self.games.pack_forget()
+        self.JapaneseVipPage(self.root)'''
+
+    def english(self):
+        self.basic_calculator.pack_forget()
+        self.sci_calculator.pack_forget()
+        self.countPage.pack_forget()
+        self.aboutPage.pack_forget()
+        EnglishVipPage(self.root)
+
+
+class EnglishVipPage(object):
+    def __init__(self, master=None):
+        self.root = master
+        self.root.geometry('%dx%d' % (385, 380))
+        self.createPage()
+
+    def createPage(self):
+        self.basic_calculator = Calculator(self.root)  # 创建不同Frame
+        self.sci_calculator = QueryFrame(self.root)
+        self.countPage = CountFrame(self.root)
+        self.aboutPage = AboutFrame(self.root)
+        self.games = Games(self.root)
+        self.basic_calculator.pack()  # 默认显示数据录入界面
+
+        # 设置菜单栏
+        self.menubar = Menu(self.root)
+        calc_menu = Menu(self.menubar, tearoff=0)
+        calc_menu.add_command(label='exit', command=lambda: exit())
+        calc_menu.add_command(label='中文', command=lambda: self.chinese())
+        # calc_menu.add_command(label='English', command=lambda: self.english())
+        calc_menu.add_command(label='日本语', command=lambda: self.japanese())
+        calc_menu.add_command(label='return', command=lambda: self.login())
+        self.menubar.add_cascade(label='menu', menu=calc_menu)
+
+        self.menubar.add_command(label='calculator', command=self.inputData)
+        self.menubar.add_command(label='info query', command=self.queryData)
+        self.menubar.add_command(label='statistics', command=self.countData)
+        self.menubar.add_command(label='finance', command=self.aboutDisp)
+        self.menubar.add_command(label='games', command=self.gameS)
+        self.root['menu'] = self.menubar
+
+    def inputData(self):
+        self.basic_calculator.pack()
+        self.sci_calculator.pack_forget()
+        self.countPage.pack_forget()
+        self.aboutPage.pack_forget()
+        self.games.pack_forget()
+
+    def queryData(self):
+        self.basic_calculator.pack_forget()
+        self.sci_calculator.pack()
+        self.countPage.pack_forget()
+        self.aboutPage.pack_forget()
+        self.games.pack_forget()
+
+
+    def countData(self):
+        self.basic_calculator.pack_forget()
+        self.sci_calculator.pack_forget()
+        self.countPage.pack()
+        self.aboutPage.pack_forget()
+        self.games.pack_forget()
+
+    def aboutDisp(self):
+        self.basic_calculator.pack_forget()
+        self.sci_calculator.pack_forget()
+        self.countPage.pack_forget()
+        self.aboutPage.pack()
+        self.games.pack_forget()
+
+    def gameS(self):
+        self.basic_calculator.pack_forget()
+        self.sci_calculator.pack_forget()
+        self.countPage.pack_forget()
+        self.aboutPage.pack_forget()
+        self.games.pack()
+
+    def login(self):
+        self.basic_calculator.destroy()
+        self.sci_calculator.destroy()
+        self.countPage.destroy()
+        self.aboutPage.destroy()
+        self.games.destroy()
+        self.menubar.destroy()
+        LoginPage(self.root)
+
+    def chinese(self):
+        self.basic_calculator.pack()
+        self.sci_calculator.pack_forget()
+        self.countPage.pack_forget()
+        self.aboutPage.pack_forget()
+        self.games.pack_forget()
+        ChineseVipPage(self.root)
+
+    def japanese(self):
+        self.basic_calculator.pack_forget()
+        self.sci_calculator.pack_forget()
+        self.countPage.pack_forget()
+        self.aboutPage.pack_forget()
+        self.games.pack_forget()
+        JapaneseVipPage(self.root)
+
+    '''def english(self):
+        self.basic_calculator.pack_forget()
+        self.sci_calculator.pack_forget()
+        self.countPage.pack_forget()
+        self.aboutPage.pack_forget()
+        self.EnglishVipPage(self.root)'''
 
 
 class VipTrial(object):

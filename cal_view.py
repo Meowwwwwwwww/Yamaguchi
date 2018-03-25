@@ -6,7 +6,7 @@ import alien_invasion as ai
 
 
 # 继承Frame类
-class InputFrame(Frame):
+class Calculator(Frame):
 
     def __init__(self, master=None):
         Frame.__init__(self, master)
