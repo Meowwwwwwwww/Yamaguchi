@@ -16,8 +16,10 @@ def reciprocal(x):
 
 
 def sqrt(x):
-    return math.sqrt(x)
-
+    if x > 0:
+        return math.sqrt(x)
+    else:
+        return "Error: expect >0"
 
 def sin(x):
     return math.sin(x*math.pi/180)
@@ -35,11 +37,17 @@ def tan(x):
 
 
 def lg(x):
-    return math.log(x, 10)
+    if x > 0:
+        return math.log(x, 10)
+    else:
+        return "Error: expect >0"
 
 
 def ln(x):
-    return math.log(x, math.pi)
+    if x > 0:
+        return math.log(x, math.e)
+    else:
+        return "Error: expect >0"
 
 
 def log(x, base):

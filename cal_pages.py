@@ -1,6 +1,11 @@
 from tkinter import *
 from tkinter.messagebox import *
-from cal_view import *
+from cal_view import Calculator
+from cal_view import Trial
+from cal_view import QueryFrame
+from cal_view import CountFrame
+from cal_view import AboutFrame
+from cal_view import Games
 
 
 class LoginPage(object):
@@ -20,7 +25,7 @@ class LoginPage(object):
         Entry(self.page, textvariable=self.username).grid(row=1, column=1, stick=E)
         Label(self.page, text='密码: ').grid(row=2, stick=W, pady=10)
         Entry(self.page, textvariable=self.password, show='*').grid(row=2, column=1, stick=E)
-        Button(self.page, text='登陆', command=self.login_check).grid(row=3, stick=W, pady=10)
+        Button(self.page, text='    登陆    ', command=self.login_check).grid(row=3, stick=W, pady=10)
         # Button(self.page, text='退出', command=self.page.quit).grid(row=3, column=1, stick=W)
         Button(self.page, text='普通模式', command=lambda: self.ordinary_mode()).grid(row=3, column=1, stick=E)
 
@@ -58,7 +63,7 @@ class Ordinary(object):
         # 创建Calculator菜单, 并加入到主菜单
         calc_menu = Menu(self.main_menu, tearoff=0)
         calc_menu.add_command(label='退出', command=lambda: exit())
-        calc_menu.add_command(label='VIP模式(试用)', command=lambda: main.vip_calculator())
+        calc_menu.add_command(label='VIP模式(试用)', command=lambda: self.vip_trial())
         calc_menu.add_command(label='返回登录界面', command=lambda: self.mainpage())
         self.main_menu.add_cascade(label='菜单', menu=calc_menu)
         self.root['menu'] = self.main_menu
@@ -153,6 +158,15 @@ class Ordinary(object):
         self.main_menu.destroy()
         LoginPage(self.root)
 
+    def vip_trial(self):
+        self.first_line.destroy()
+        self.second_line.destroy()
+        self.third_line.destroy()
+        self.forth_line.destroy()
+        self.textbox.destroy()
+        self.main_menu.destroy()
+        VipTrial(self.root)
+
 
 class ChineseVipPage(object):
     def __init__(self, master=None):
@@ -178,9 +192,9 @@ class ChineseVipPage(object):
         calc_menu.add_command(label='返回', command=lambda: self.login())
         self.menubar.add_cascade(label='菜单', menu=calc_menu)
 
-        self.menubar.add_command(label='基础计算', command=self.inputData)
-        self.menubar.add_command(label='科学计算', command=self.queryData)
-        self.menubar.add_command(label='统计计算', command=self.countData)
+        self.menubar.add_command(label='科学计算', command=self.inputData)
+        self.menubar.add_command(label='信息查询', command=self.queryData)
+        self.menubar.add_command(label='统计分析', command=self.countData)
         self.menubar.add_command(label='财务计算', command=self.aboutDisp)
         self.menubar.add_command(label='游戏', command=self.gameS)
         self.root['menu'] = self.menubar
@@ -461,7 +475,7 @@ class VipTrial(object):
         self.createPage()
 
     def createPage(self):
-        self.basic_calculator = InputFrame(self.root)  # 创建不同Frame
+        self.basic_calculator = Trial(self.root)  # 创建不同Frame
         self.sci_calculator = QueryFrame(self.root)
         self.countPage = CountFrame(self.root)
         self.aboutPage = AboutFrame(self.root)
@@ -470,10 +484,17 @@ class VipTrial(object):
 
         # 设置菜单栏
         self.menubar = Menu(self.root)
-        self.menubar.add_command(label='返回', command=self.login)
-        self.menubar.add_command(label='基础计算', command=self.inputData)
-        self.menubar.add_command(label='科学计算', command=self.queryData)
-        self.menubar.add_command(label='统计计算', command=self.countData)
+        calc_menu = Menu(self.menubar, tearoff=0)
+        calc_menu.add_command(label='退出', command=lambda: exit())
+        # calc_menu.add_command(label='中文', command=lambda: self.chinese())
+        calc_menu.add_command(label='English')
+        calc_menu.add_command(label='日本语')
+        calc_menu.add_command(label='返回', command=lambda: self.login())
+        self.menubar.add_cascade(label='菜单', menu=calc_menu)
+
+        self.menubar.add_command(label='科学计算', command=self.inputData)
+        self.menubar.add_command(label='信息查询', command=self.queryData)
+        self.menubar.add_command(label='统计分析', command=self.countData)
         self.menubar.add_command(label='财务计算', command=self.aboutDisp)
         self.menubar.add_command(label='游戏', command=self.gameS)
         self.root['menu'] = self.menubar
@@ -522,3 +543,26 @@ class VipTrial(object):
         self.games.destroy()
         self.menubar.destroy()
         LoginPage(self.root)
+
+    '''def chinese(self):
+        self.basic_calculator.pack()
+        self.sci_calculator.pack_forget()
+        self.countPage.pack_forget()
+        self.aboutPage.pack_forget()
+        self.games.pack_forget()
+        self.ChineseVipPage(self.root)'''
+
+    def japanese(self):
+        self.basic_calculator.pack_forget()
+        self.sci_calculator.pack_forget()
+        self.countPage.pack_forget()
+        self.aboutPage.pack_forget()
+        self.games.pack_forget()
+        JapaneseVipPage(self.root)
+
+    def english(self):
+        self.basic_calculator.pack_forget()
+        self.sci_calculator.pack_forget()
+        self.countPage.pack_forget()
+        self.aboutPage.pack_forget()
+        EnglishVipPage(self.root)
