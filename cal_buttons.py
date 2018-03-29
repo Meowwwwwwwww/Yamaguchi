@@ -54,6 +54,12 @@ def create_vip_button(root, text):
     button(second_line, 'cos', lambda t=text: t.set(sc.cos(float(t.get()))))
     button(second_line, 'tan', lambda t=text: t.set(sc.tan(float(t.get()))))
 
+    '''ew_line = frame(root)
+    button(new_line, 'ln', lambda t=text: t.set(sc.ln(float(t.get()))))
+    button(new_line, 'arcsin', lambda t=text: t.set(sc.sin(float(t.get()))))
+    button(new_line, 'arccos', lambda t=text: t.set(sc.cos(float(t.get()))))
+    button(new_line, 'arctan', lambda t=text: t.set(sc.tan(float(t.get()))))'''
+
     # 创建第三行五个按钮
     third_line = frame(root)
     button(third_line, '7', lambda t=text, c='7': t.set(t.get() + c))
@@ -133,3 +139,77 @@ def create_trial_button(root, text):
     button_trial(sixth_line, '(')
     button_trial(sixth_line, ')')
     button_trial(sixth_line, '=')
+
+
+def create_financial_button(root):
+    first = frame(root)
+    second = frame(root)
+    third = frame(root)
+    fourth = frame(root)
+    Label(first, text='财务函数: ').pack(side=LEFT, expand=YES, fill=BOTH, padx=2, pady=2, ipadx=8, ipady=6)
+    Button(first, text='现值计算', command=self.present).pack(side=LEFT, expand=YES, fill=BOTH, padx=2, pady=2,
+                                                               ipadx=8, ipady=6)
+    Button(first, text='复利终值计算', command=self.future).pack(side=LEFT, expand=YES, fill=BOTH, padx=2, pady=2,
+                                                                ipadx=8, ipady=6)
+    Button(first, text='单利终值计算', command=self.simple).pack(side=LEFT, expand=YES, fill=BOTH, padx=2, pady=2,
+                                                                ipadx=8, ipady=6)
+    Button(second, text='项目盈利指标', command=self.profit).pack(side=LEFT, expand=YES, fill=BOTH, padx=2, pady=2,
+                                                                 ipadx=8, ipady=6)
+    Button(second, text='资本资产定价', command=self.capm).pack(side=LEFT, expand=YES, fill=BOTH, padx=2, pady=2,
+                                                               ipadx=8, ipady=6)
+    Button(second, text='股利折现模型', command=self.stock).pack(side=LEFT, expand=YES, fill=BOTH, padx=2, pady=2,
+                                                                ipadx=8, ipady=6)
+    Button(third, text='债券定价模型', command=self.security).pack(side=LEFT, expand=YES, fill=BOTH, padx=2, pady=2,
+                                                                  ipadx=8, ipady=6)
+    Button(third, text='年金现值计算', command=self.annuity).pack(side=LEFT, expand=YES, fill=BOTH, padx=2, pady=2,
+                                                                 ipadx=8, ipady=6)
+    Label(fourth, text='计量函数: ').pack(side=LEFT, expand=YES, fill=BOTH, padx=2, pady=2, ipadx=8, ipady=6)
+    Button(fourth, text='一元一次线性回归', command=self.OOregre).pack(side=LEFT, expand=YES, fill=BOTH, padx=2, pady=2,
+                                                                    ipadx=8, ipady=6)
+    Button(fourth, text='二元一次线性回归', command=self.Oregre).pack(side=LEFT, expand=YES, fill=BOTH, padx=2, pady=2,
+                                                                   ipadx=8, ipady=6)
+
+
+def present():
+    page.destroy()
+    calpre.Present_value_page(root)
+
+def future():
+    self.page.destroy()
+    calfut.future_value_page(root)
+
+def simple(self):
+    self.page.destroy()
+    calsim.simple_interest_page(self.root)
+
+def profit(self):
+    self.page.destroy()
+    calpro.program_profit_page(self.root)
+
+def capm(self):
+    self.page.destroy()
+    calcapm.capm_page(self.root)
+
+def stock(self):
+    self.page.destroy()
+    calsto.capm_page(self.root)
+
+def security(self):
+    self.page.destroy()
+    calsec.capm_page(self.root)
+
+def annuity(self):
+    self.page.destroy()
+    calann.capm_page(self.root)
+
+def OOregre(self):
+    self.page.destroy()
+    caloor.OneOneRegression_page(self.root)
+
+def Oregre(self):
+    self.page.destroy()
+    calwor.TwoOneRegression_page(self.root)
+
+def Vip_Page(self):
+    self.page.destroy()
+    ChineseVipPage(self.root)
